@@ -1,0 +1,29 @@
+{
+    "name": "ericliao79/l5-allpay",
+    "description": "Laravel5 allpay package.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ericliao79",
+            "email": "liaogd79@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "ericliao79\\l5allpay\\" : "src",
+            "ericliao79\\l5allpay\\Tests\\": "tests"
+        }
+    },
+
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "filp/whoops": "~2.0",
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~6.0"
+    }
+}
