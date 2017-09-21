@@ -1,7 +1,10 @@
 <?php
+
 namespace ericliao79\l5allpay;
 
+use ericliao79\l5allpay\Criteria\LangType;
 use ericliao79\l5allpay\Criteria\PaymentMethod;
+use ericliao79\l5allpay\Exceptions\PaymentMethodException;
 
 /**
  * Class allpay
@@ -12,6 +15,8 @@ use ericliao79\l5allpay\Criteria\PaymentMethod;
  */
 class allpay extends PaysAbstract implements PaysInterface
 {
+    use EcpayTrait;
+
     public function __construct($MerchantID, $HashKey, $HashIV)
     {
         $this->MerchantID = $MerchantID ?? config('allpay.MerchantID');
@@ -20,14 +25,14 @@ class allpay extends PaysAbstract implements PaysInterface
         $this->setProviderUrl(config('allpay.Debug'));
         $this->setReturnURL(config('allpay.ReturnURL'));
         $this->setPaymentMethod(config('allpay.paymentMethod'));
-
+        $this->setVersion(config('allpay.Version'));
+        $this->setLangType(config('allpay.LangType'));
 
 //
 //
 //
 //        $this->setExpireDate(config('allpay.ExpireDays'));
 //        $this->setExpireTime(config('allpay.ExpireTime'));
-//        $this->setVersion(config('allpay.Version'));
 //        $this->setLangType(config('allpay.LangType'));
 //        $this->setRespondType(config('allpay.RespondType'));
 //        $this->setEmailModify(config('allpay.EmailModify'));
@@ -39,6 +44,20 @@ class allpay extends PaysAbstract implements PaysInterface
 //        $this->setTimeStamp();
     }
 
+    function debug()
+    {
+        $this->debug = true;
+    }
+
+    function __get($name)
+    {
+        if (!$this->debug) {
+            return;
+        }
+
+        return $this->$name;
+    }
+
     function setProviderUrl($debug_mode): self
     {
         if ($debug_mode)
@@ -48,7 +67,6 @@ class allpay extends PaysAbstract implements PaysInterface
         return $this;
     }
 
-
     function setReturnURL($url): self
     {
         $this->ReturnURL = $url;
@@ -56,45 +74,52 @@ class allpay extends PaysAbstract implements PaysInterface
         return $this;
     }
 
-    function setPaymentMethod($pay = PaymentMethod::ALL): self
+    function setPaymentMethod($pay): self
     {
-        switch ($pay) {
-            case PaymentMethod::ALL:
-                $this->PaymentMethod = $pay;
-                break;
-            case PaymentMethod::ATM:
-                $this->PaymentMethod = $pay;
-                break;
-            case PaymentMethod::Credit:
-                $this->PaymentMethod = $pay;
-                break;
-            case PaymentMethod::CVS:
-                $this->PaymentMethod = $pay;
-                break;
-            case PaymentMethod::Tenpay:
-                $this->PaymentMethod = $pay;
-                break;
-            case PaymentMethod::WebATM:
-                $this->PaymentMethod = $pay;
-                break;
-            case PaymentMethod::TopUpUsed:
-                $this->PaymentMethod = $pay;
-                break;
-            default:
-                throw new \Exception();
+        $fix = [
+            PaymentMethod::ALL,
+            PaymentMethod::ATM,
+            PaymentMethod::WebATM,
+            PaymentMethod::Credit,
+            PaymentMethod::CVS,
+        ];
+
+        if (in_array($pay, $fix)) {
+            $this->PaymentMethod = $pay;
+        } else {
+            throw new PaymentMethodException();
         }
 
         return $this;
     }
 
-
-
-    function CheckOut($target = "_self")
+    function setVersion($version): self
     {
+        $this->Version = $version;
 
+        return $this;
     }
 
-    public function test()
+    function setLangType($lang): self
     {
+         $fix = [
+            LangType::CHI,
+            LangType::ENG,
+            LangType::JPN,
+            LangType::KOR
+        ];
+
+         if (in_array($lang, $fix)) {
+             $this->LangType = $lang;
+         } else {
+             $this->LangType = '';
+         }
+
+         return $this;
+    }
+
+    function CheckOut()
+    {
+        if ($this->debug) return;
     }
 }
