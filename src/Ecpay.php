@@ -5,17 +5,19 @@ namespace ericliao79\l5allpay;
 use ericliao79\l5allpay\Criteria\LangType;
 use ericliao79\l5allpay\Criteria\PaymentMethod;
 use ericliao79\l5allpay\Exceptions\PaymentMethodException;
+use ericliao79\l5allpay\Traits\DebugTrait;
+use ericliao79\l5allpay\Traits\EcpayTrait;
 
 /**
- * Class allpay
+ * Class Ecpay
  * @property  PaysAbstract MerchantID
  * @property  PaysAbstract HashKey
  * @property  PaysAbstract HashIV
  * @package ericliao79\l5allpay
  */
-class allpay extends PaysAbstract implements PaysInterface
+class Ecpay extends PaysAbstract implements PaysInterface
 {
-    use EcpayTrait;
+    use EcpayTrait, DebugTrait;
 
     public function __construct($MerchantID, $HashKey, $HashIV)
     {
@@ -28,9 +30,6 @@ class allpay extends PaysAbstract implements PaysInterface
         $this->setVersion(config('allpay.Version'));
         $this->setLangType(config('allpay.LangType'));
 
-//
-//
-//
 //        $this->setExpireDate(config('allpay.ExpireDays'));
 //        $this->setExpireTime(config('allpay.ExpireTime'));
 //        $this->setLangType(config('allpay.LangType'));
@@ -42,11 +41,6 @@ class allpay extends PaysAbstract implements PaysInterface
 //        $this->setCustomerURL(config('allpay.CustomerURL'));
 //        $this->setNotifyURL(config('allpay.NotifyURL'));
 //        $this->setTimeStamp();
-    }
-
-    function debug()
-    {
-        $this->debug = true;
     }
 
     function __get($name)

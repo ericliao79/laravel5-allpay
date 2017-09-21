@@ -12,6 +12,10 @@
             <directory suffix="Test.php">tests/</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="APP_URL" value="http://allpay.dev/"/>
+        <env name="ALLPAY_ReturnUrl" value="return/"/>
+    </php>
     <!--<logging>-->
     <!--<log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>-->
     <!--<log type="coverage-text" target="build/coverage.txt"/>-->

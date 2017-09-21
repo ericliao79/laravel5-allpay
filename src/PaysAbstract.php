@@ -11,26 +11,51 @@ namespace ericliao79\l5allpay;
 
 abstract class PaysAbstract
 {
-    protected $CreditRed;
-    protected $InstFlag;
-    protected $CheckValue;
+    /**
+     * @var 店家編號
+     */
     protected $MerchantID;
+
+    /**
+     * @var HashKey
+     */
     protected $HashKey;
+
+    /**
+     * @var HashIV
+     */
     protected $HashIV;
 
+    /**
+     * @var 供應商 url
+     */
     protected $ProviderUrl;
+
+    /**
+     * @var 付款方式
+     */
     protected $PaymentMethod;
 
-    protected $Version;
-    protected $CREDIT;
-    protected $TimeStamp;
-    protected $UNIONPAY;
-    protected $WEBATM;
-    protected $VACC;
-    protected $BARCODE;
-    protected $CVS;
-    protected $CUSTOM;
+    /**
+     * @var 語言設定
+     */
     protected $LangType;
+
+    /**
+     * @var 供應商 api 版本
+     */
+    protected $Version;
+
+
+
+
+
+
+
+    protected $InstFlag;
+    protected $CheckValue;
+    protected $TimeStamp;
+
     protected $RespondType;
     protected $TradeLimit;
     protected $ExpireDate;
