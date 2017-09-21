@@ -11,4 +11,4 @@ Taiwan's Third-Party Payment SDK all-in-one for Laravel.
 
 ## ToDo
  - [x] ecpay
- - [] pay2go
+ - [ ] pay2go
