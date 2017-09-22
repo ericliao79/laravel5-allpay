@@ -13,7 +13,7 @@ if (!function_exists('config')) {
     function config($key = null, $default = null)
     {
         $key = explode(".", $key);
-        $config = require __DIR__ . '/../config/allpay.php';
+        $config = require __DIR__ . '/config/allpay.php';
 
         return $config[$key[1]] ?? $default;
     }

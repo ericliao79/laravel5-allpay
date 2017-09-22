@@ -1,5 +1,5 @@
 <?php
-namespace Tests\unit;
+require_once __DIR__ . '/../../tools.php';
 
 use ericliao79\l5allpay\Ecpay;
 use ericliao79\l5allpay\Criteria\LangType;

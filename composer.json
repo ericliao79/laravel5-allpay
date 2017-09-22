@@ -29,9 +29,6 @@
     "autoload-dev": {
         "psr-4": {
             "ericliao79\\l5allpay\\Tests\\": "tests"
-        },
-        "files": [
-            "src/tools.php"
-        ]
+        }
     }
 }
