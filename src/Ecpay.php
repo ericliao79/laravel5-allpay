@@ -22,7 +22,7 @@ class Ecpay extends PaysAbstract implements PaysInterface
 {
     use BaseTrait, EcpayTrait, DebugTrait, EcpayValidates;
 
-    public function __construct($MerchantID, $HashKey, $HashIV)
+    public function __construct($MerchantID = null, $HashKey = null, $HashIV = null)
     {
         $this->MerchantID = $MerchantID ?? config('allpay.MerchantID');
         $this->HashKey = $HashKey ?? config('allpay.HashKey');
@@ -58,9 +58,9 @@ class Ecpay extends PaysAbstract implements PaysInterface
     public function setProviderUrl($debug_mode): self
     {
         if ($debug_mode)
-            $this->ProviderUrl = 'https://payment.ecpay.com.tw/Cashier/';
-        else
             $this->ProviderUrl = 'https://payment-stage.ecpay.com.tw/Cashier/';
+        else
+            $this->ProviderUrl = 'https://payment.ecpay.com.tw/Cashier/';
         return $this;
     }
 

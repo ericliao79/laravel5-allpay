@@ -15,7 +15,7 @@ class l5allpayServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/allpay.php' => config_path('allpay.php')
+            __DIR__ . '/../../config/allpay.php' => config_path('allpay.php')
         ], 'config');
     }
 
