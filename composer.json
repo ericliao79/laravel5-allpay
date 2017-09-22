@@ -1,6 +1,7 @@
 {
     "name": "ericliao79/l5-allpay",
     "description": "Laravel5 allpay package.",
+    "keywords": ["pay", "laravel"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -10,17 +11,6 @@
         }
     ],
     "minimum-stability": "stable",
-    "autoload": {
-        "psr-4": {
-            "ericliao79\\l5allpay\\" : "src",
-            "ericliao79\\l5allpay\\Tests\\": "tests"
-        },
-
-        "files": [
-            "src/tools.php"
-        ]
-    },
-
     "require": {
         "php": ">=7.1"
     },
@@ -30,5 +20,18 @@
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0",
         "illuminate/support": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ericliao79\\l5allpay\\" : "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ericliao79\\l5allpay\\Tests\\": "tests"
+        },
+        "files": [
+            "src/tools.php"
+        ]
     }
 }
