@@ -8,19 +8,19 @@ use ericliao79\l5allpay\Criteria\PaymentMethod;
 use ericliao79\l5allpay\Exceptions\PaymentMethodException;
 use ericliao79\l5allpay\Traits\BaseTrait;
 use ericliao79\l5allpay\Traits\DebugTrait;
-use ericliao79\l5allpay\Traits\EcpayTrait;
-use ericliao79\l5allpay\Validation\EcpayValidates;
+use ericliao79\l5allpay\Traits\OpayTrait;
+use ericliao79\l5allpay\Validation\OpayValidates;
 
 /**
- * Class Ecpay
+ * Class OPay
  * @property  PaysAbstract MerchantID
  * @property  PaysAbstract HashKey
  * @property  PaysAbstract HashIV
  * @package ericliao79\l5allpay
  */
-class Ecpay extends PaysAbstract implements PaysInterface
+class Opay extends PaysAbstract implements PaysInterface
 {
-    use BaseTrait, EcpayTrait, DebugTrait, EcpayValidates;
+    use BaseTrait, OpayTrait, DebugTrait, OpayValidates;
 
     public function __construct($MerchantID = null, $HashKey = null, $HashIV = null)
     {

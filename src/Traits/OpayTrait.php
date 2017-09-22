@@ -9,7 +9,7 @@
 namespace ericliao79\l5allpay\Traits;
 
 
-trait EcpayTrait
+trait OpayTrait
 {
     protected $PaymentType = 'aio';
 

@@ -2,7 +2,7 @@
 namespace ericliao79\l5allpay\Validation;
 
 
-trait EcpayValidates
+trait OpayValidates
 {
     use BaseValidates;
 

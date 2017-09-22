@@ -4,13 +4,13 @@ return [
     // 測試模式
     'Debug' => env('ALLPAY_DEBUG_MODE', false),
 
-    //歐付寶商店代號
+    //商店代號
     'MerchantID' => env('ALLPAY_STORE_ID'),
 
-    //歐付寶 HashKey
+    //HashKey
     'HashKey' => env('ALLPAY_HASH_KEY'),
 
-    //歐付寶 HashKey
+    //HashKey
     'HashIV' => env('ALLPAY_HASH_IV'),
 
     /*
@@ -32,7 +32,7 @@ return [
     'LangType' => 'zh-tw',
 
     /*
-     * 是否需要登入智付寶會員
+     * 是否需要登入會員
      */
     'LoginType' => false,
 
