@@ -60,12 +60,4 @@ class ToolsService
 
         return $sMacValue;
     }
-
-    /**
-     * 自訂排序使用
-     */
-    private static function merchantSort($a, $b)
-    {
-        return strcasecmp($a, $b);
-    }
 }

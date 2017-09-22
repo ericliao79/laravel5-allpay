@@ -12,32 +12,32 @@ namespace ericliao79\l5allpay;
 abstract class PaysAbstract
 {
     /**
-     * @var 店家編號
+     * @var string 店家編號
      */
     protected $MerchantID;
 
     /**
-     * @var HashKey
+     * @var string HashKey
      */
     protected $HashKey;
 
     /**
-     * @var HashIV
+     * @var string HashIV
      */
     protected $HashIV;
 
     /**
-     * @var 供應商 url
+     * @var string 供應商 url
      */
     protected $ProviderUrl;
 
     /**
-     * @var 付款方式
+     * @var string 付款方式
      */
     protected $PaymentMethod;
 
     /**
-     * @var 語言設定
+     * @var string 語言設定
      */
     protected $LangType;
 
@@ -46,14 +46,33 @@ abstract class PaysAbstract
      */
     protected $Version;
 
+    /**
+     * @var string 訂單編號
+     */
+    protected $MerchantOrderNo;
 
+    /**
+     * @var string 訂單名稱
+     */
+    protected $ItemName;
 
+    /**
+     * @var string 訂單資訊
+     */
+    protected $ItemDesc;
 
+    /**
+     * @var int 訂單總價
+     */
+    protected $TotalAmount;
 
+    /**
+     * @var string 檢查碼
+     */
+    protected $CheckValue;
 
 
     protected $InstFlag;
-    protected $CheckValue;
     protected $TimeStamp;
 
     protected $RespondType;
@@ -67,8 +86,5 @@ abstract class PaysAbstract
     protected $CustomerURL;
     protected $NotifyURL;
     protected $ReturnURL;
-    protected $MerchantOrderNo;
-    protected $ItemDesc;
     protected $Email;
-    protected $Amt;
 }

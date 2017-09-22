@@ -12,4 +12,13 @@ namespace ericliao79\l5allpay\Traits;
 trait EcpayTrait
 {
     protected $PaymentType = 'aio';
+
+
+    /**
+     * 自訂排序使用
+     */
+    protected static function merchantSort($a, $b)
+    {
+        return strcasecmp($a, $b);
+    }
 }
