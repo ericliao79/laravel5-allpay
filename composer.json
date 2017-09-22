@@ -1,5 +1,5 @@
 {
-    "name": "ericliao79/l5-allpay",
+    "name": "ericliao79/laravel5-allpay",
     "description": "Laravel5 allpay package.",
     "keywords": ["pay", "laravel"],
     "type": "library",
