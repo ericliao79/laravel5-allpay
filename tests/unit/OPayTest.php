@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/../../tools.php';
 
-use ericliao79\l5allpay\Ecpay;
+use ericliao79\l5allpay\Opay;
 use ericliao79\l5allpay\Criteria\LangType;
 use ericliao79\l5allpay\Criteria\PaymentMethod;
 use ericliao79\l5allpay\Exceptions\PaymentMethodException;
 use ericliao79\l5allpay\Exceptions\TradeException;
 use PHPUnit\Framework\TestCase;
 
-class EcPayTest extends TestCase
+class OPayTest extends TestCase
 {
     private function CreateTarget()
     {
@@ -16,7 +16,7 @@ class EcPayTest extends TestCase
         $HashKey = '5294y06JbISpM5x9';
         $HashIV = 'v77hoKGq4kWxNNIS';
 
-        $target = new Ecpay($MerchantID, $HashKey, $HashIV);
+        $target = new Opay($MerchantID, $HashKey, $HashIV);
         $target->debug();
 
         return $target;
@@ -43,14 +43,14 @@ class EcPayTest extends TestCase
 
         /** act */
         $target = $this->CreateTarget();
-        $target->setProviderUrl(true);
+        $target->setProviderUrl(false);
         $this->assertSame($ProviderUrl, $target->ProviderUrl);
 
-        $target->setProviderUrl(false);
+        $target->setProviderUrl(true);
         $this->assertSame($ProviderUrl_debug, $target->ProviderUrl);
 
         /** assert */
-        $this->assertInstanceOf(Ecpay::class, $target);
+        $this->assertInstanceOf(Opay::class, $target);
     }
 
     /**
@@ -65,7 +65,7 @@ class EcPayTest extends TestCase
         $target = $this->CreateTarget();
         $target->ReturnURL;
         /** assert */
-        $this->assertInstanceOf(Ecpay::class, $target);
+        $this->assertInstanceOf(Opay::class, $target);
         $this->assertSame($ReturnURL, $target->ReturnURL);
     }
 
@@ -82,7 +82,7 @@ class EcPayTest extends TestCase
         $target->setVersion('V5');
 
         /** assert */
-        $this->assertInstanceOf(Ecpay::class, $target);
+        $this->assertInstanceOf(Opay::class, $target);
         $this->assertSame($version, $target->Version);
     }
 
@@ -111,7 +111,7 @@ class EcPayTest extends TestCase
         $target->setLangType('CH');
         $this->assertSame('', $target->LangType);
 
-        $this->assertInstanceOf(Ecpay::class, $target);
+        $this->assertInstanceOf(Opay::class, $target);
     }
 
     /**
@@ -140,7 +140,7 @@ class EcPayTest extends TestCase
         $this->expectException(PaymentMethodException::class);
         $target->setPaymentMethod('TopUpUsed');
 
-        $this->assertInstanceOf(Ecpay::class, $target);
+        $this->assertInstanceOf(Opay::class, $target);
     }
 
     /**
@@ -160,7 +160,7 @@ class EcPayTest extends TestCase
         $this->assertSame($item, $target->ItemName);
         $this->assertSame($desc, $target->ItemDesc);
 
-        $this->assertInstanceOf(Ecpay::class, $order);
+        $this->assertInstanceOf(Opay::class, $order);
     }
 
     /**

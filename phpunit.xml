@@ -15,5 +15,6 @@
     <php>
         <env name="APP_URL" value="http://allpay.dev/"/>
         <env name="ALLPAY_ReturnUrl" value="return/"/>
+        <env name="ALLPAY_DEBUG_MODE" value="true"/>
     </php>
 </phpunit>
