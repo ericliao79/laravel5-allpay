@@ -15,6 +15,8 @@ trait OpayTrait
 {
     protected $PaymentType = 'aio';
 
+    protected $EncryptType = EncryptType::ENC_SHA256;
+
 
     /**
      * 自訂排序使用

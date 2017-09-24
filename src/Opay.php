@@ -2,7 +2,6 @@
 
 namespace ericliao79\l5allpay;
 
-use ericliao79\l5allpay\Criteria\EncryptType;
 use ericliao79\l5allpay\Criteria\LangType;
 use ericliao79\l5allpay\Criteria\PaymentMethod;
 use ericliao79\l5allpay\Exceptions\PaymentMethodException;
@@ -210,7 +209,7 @@ class Opay extends PaysAbstract implements PaysInterface
             'ReturnURL' => $this->NotifyURL,
             'OrderResultURL' => $this->ReturnURL,
             'ChoosePayment' => $this->PaymentMethod,
-            'EncryptType' => EncryptType::ENC_SHA256,
+            'EncryptType' => $this->EncryptType,
         ];
 
         if ($this->ClientBackURL !== null)
@@ -238,6 +237,7 @@ class Opay extends PaysAbstract implements PaysInterface
             'MerchantID' => $this->MerchantID,
             'MerchantTradeNo' => $order,
             'TimeStamp' => time(),
+            'EncryptType' => $this->EncryptType
         ];
 
         try{
