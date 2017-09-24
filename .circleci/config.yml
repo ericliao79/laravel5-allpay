@@ -4,8 +4,6 @@ jobs:
   "php-7.1":
     docker:
       - image: circleci/php:7.1.9-browsers
-      environment:
-        TZ: "/usr/share/zoneinfo/Asia/Taipei"
     working_directory: ~/laravel
     steps:
       - checkout
@@ -24,8 +22,6 @@ jobs:
   "php-7.0":
     docker:
       - image: circleci/php:7.1.9-browsers
-      environment:
-        TZ: "/usr/share/zoneinfo/Asia/Taipei"
     working_directory: ~/laravel
     steps:
       - checkout
