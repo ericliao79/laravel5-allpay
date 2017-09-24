@@ -20,6 +20,9 @@ trait OpayTrait
 
     /**
      * 自訂排序使用
+     * @param $a
+     * @param $b
+     * @return int
      */
     protected static function merchantSort($a, $b)
     {

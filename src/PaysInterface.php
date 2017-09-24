@@ -112,7 +112,7 @@ interface PaysInterface
 
     /**
      * 取得訂單資訊
-     * @param $order 商家訂單唯一值
+     * @param string $order 商家訂單唯一值
      * @return mixed
      */
     function getTradeInfo($order);
