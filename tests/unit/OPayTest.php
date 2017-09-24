@@ -71,6 +71,23 @@ class OPayTest extends TestCase
 
     /**
      * @test
+     * @group now
+     */
+    public function ClientURL()
+    {
+        /** arrange */
+        $ReturnURL = 'http://allpay.dev/clientUrl/';
+
+        /** act */
+        $target = $this->CreateTarget();
+        $target->setClientBackURL($ReturnURL);
+        /** assert */
+        $this->assertInstanceOf(Opay::class, $target);
+        $this->assertSame($ReturnURL, $target->ClientBackURL);
+    }
+
+    /**
+     * @test
      */
     public function setVersion()
     {
@@ -206,9 +223,12 @@ class OPayTest extends TestCase
                 'TotalAmount' => $total,
                 'TradeDesc' => $desc,
                 'ItemName' => $item,
-                'ReturnURL' => 'http://allpay.dev/return/',
+                'ReturnURL' => 'http://allpay.dev/callback/',
+                'OrderResultURL' => "http://allpay.dev/return/",
                 'ChoosePayment' => 'ALL',
                 'EncryptType' => 1,
+                'ClientBackURL' => "http://allpay.dev/ClientBackUrl/",
+                'ExpireDate' => 7
             ]
         ];
 

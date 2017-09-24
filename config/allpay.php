@@ -21,7 +21,9 @@ return [
     'RespondType' => 'JSON',
 
     /*
-     * 串接版本
+     * O-pay: 預設為V5
+     * Pay2go: 預設為V1.2
+     * 金流商api 串接版本
      */
     'Version' => 'V5',
 
@@ -47,11 +49,17 @@ return [
 
     /*
      * 繳費-有效天數
-     *
-     * default: 7
-     * maxValue: 180
+     * O-pay
+     *  mix: 1
+     *  default: 7
+     *  maxValue: 60
+     * pay2go:
+     *  mix: 1
+     *  default: 7
+     *  maxValue: 60
      */
     'ExpireDays' => 7,
+
     /*
      * 繳費-有效時間(僅適用超商代碼交易)
      *
@@ -66,6 +74,7 @@ return [
      * 僅接受 port 80 or 443
      */
     'ReturnURL' => env('ALLPAY_ReturnUrl') != null ? env('APP_URL') . env('ALLPAY_ReturnUrl') : null,
+
     /*
      * 付款完成-後的通知連結
      *
@@ -73,6 +82,7 @@ return [
      * 僅接受 port 80 or 443
      */
     'NotifyURL' => env('ALLPAY_NotifyURL') != null ? env('APP_URL') . env('ALLPAY_NotifyURL') : null,
+
     /*
      * 商店取號網址
      *
@@ -86,7 +96,8 @@ return [
      *
      * default: null
      */
-    'ClientBackURL' => env('CASH_Client_BackUrl') != null ? env('APP_URL') . env('CASH_Client_BackUrl') : null,
+    'ClientBackURL' => env('ALLPAY_Client_BackUrl') != null ? env('APP_URL') . env('ALLPAY_Client_BackUrl') : null,
+
     /*
      * 付款人電子信箱是否開放修改
      *
@@ -112,8 +123,8 @@ return [
      * Tenpay: 財付通
      * TopUpUsed: 儲值消費
      */
-
     'paymentMethod' => 'ALL',
+
     /*
      * 是否啟用自定義支付
      *

@@ -9,7 +9,9 @@ use ericliao79\l5allpay\Exceptions\PaymentMethodException;
 use ericliao79\l5allpay\Traits\BaseTrait;
 use ericliao79\l5allpay\Traits\DebugTrait;
 use ericliao79\l5allpay\Traits\OpayTrait;
+use ericliao79\l5allpay\Traits\StoreTrait;
 use ericliao79\l5allpay\Validation\OpayValidates;
+use GuzzleHttp\Client;
 
 /**
  * Class OPay
@@ -20,39 +22,31 @@ use ericliao79\l5allpay\Validation\OpayValidates;
  */
 class Opay extends PaysAbstract implements PaysInterface
 {
-    use BaseTrait, OpayTrait, DebugTrait, OpayValidates;
+    use BaseTrait, DebugTrait, OpayTrait, OpayValidates, StoreTrait;
 
     public function __construct($MerchantID = null, $HashKey = null, $HashIV = null)
     {
         $this->MerchantID = $MerchantID ?? config('allpay.MerchantID');
         $this->HashKey = $HashKey ?? config('allpay.HashKey');
         $this->HashIV = $HashIV ?? config('allpay.HashIV');
-        $this->setProviderUrl(config('allpay.Debug'));
-        $this->setReturnURL(config('allpay.ReturnURL'));
         $this->setPaymentMethod(config('allpay.paymentMethod'));
         $this->setVersion(config('allpay.Version'));
         $this->setLangType(config('allpay.LangType'));
         $this->setTimeStamp();
 
-//        $this->setExpireDate(config('allpay.ExpireDays'));
-//        $this->setExpireTime(config('allpay.ExpireTime'));
+        $this->setProviderUrl(config('allpay.Debug'));
+        $this->setReturnURL(config('allpay.ReturnURL'));
+        $this->setNotifyURL(config('allpay.NotifyURL'));
+        $this->setCustomerURL(config('allpay.CustomerURL'));
+        $this->setClientBackURL(config('allpay.ClientBackURL'));
+
+        $this->setExpireDate(config('allpay.ExpireDays'));
+        $this->setExpireTime(config('allpay.ExpireTime'));
+
 //        $this->setRespondType(config('allpay.RespondType'));
 //        $this->setEmailModify(config('allpay.EmailModify'));
 //        $this->setTradeLimit(config('allpay.TradeLimit'));
 //        $this->setOrderComment(config('allpay.OrderComment'));
-//        $this->setClientBackURL(config('allpay.ClientBackURL'));
-//        $this->setCustomerURL(config('allpay.CustomerURL'));
-//        $this->setNotifyURL(config('allpay.NotifyURL'));
-//
-    }
-
-    function __get($name)
-    {
-        if (!$this->debug) {
-            return;
-        }
-
-        return $this->$name;
     }
 
     public function setProviderUrl($debug_mode): self
@@ -115,10 +109,10 @@ class Opay extends PaysAbstract implements PaysInterface
         return $this;
     }
 
-    public function setNotifyURL($notify_url)
+    public function setNotifyURL($notify_url): self
     {
-        if ($notify_url != null)
-            $this->NotifyURL = $notify_url;
+        $this->NotifyURL = $notify_url;
+
         return $this;
     }
 
@@ -133,6 +127,26 @@ class Opay extends PaysAbstract implements PaysInterface
     {
         if ($client_back_url != null)
             $this->ClientBackURL = $client_back_url;
+        return $this;
+    }
+
+    public function setExpireDate($ExpireDate): self
+    {
+        if (! in_array($this->PaymentMethod, [PaymentMethod::ALL, PaymentMethod::ATM])) {
+            return $this;
+        }
+
+        if ($ExpireDate != null)
+            $this->ExpireDate = $ExpireDate;
+
+        return $this;
+    }
+
+    public function setExpireTime($ExpireTime): self
+    {
+//        if ($ExpireTime != null)
+//            $this->ExpireTime = $ExpireTime;
+
         return $this;
     }
 
@@ -185,7 +199,7 @@ class Opay extends PaysAbstract implements PaysInterface
 
     function OrderFormatter(): array
     {
-        return [
+        $order = [
             'MerchantID' => $this->MerchantID,
             'MerchantTradeNo' => $this->MerchantOrderNo,
             'MerchantTradeDate' => date('Y/m/d H:i:s', $this->TimeStamp),
@@ -193,58 +207,56 @@ class Opay extends PaysAbstract implements PaysInterface
             'TotalAmount' => $this->TotalAmount,
             'TradeDesc' => $this->ItemDesc,
             'ItemName' => $this->ItemName,
-            'ReturnURL' => $this->ReturnURL,
+            'ReturnURL' => $this->NotifyURL,
+            'OrderResultURL' => $this->ReturnURL,
             'ChoosePayment' => $this->PaymentMethod,
-            'EncryptType' => EncryptType::ENC_SHA256
+            'EncryptType' => EncryptType::ENC_SHA256,
         ];
+
+        if ($this->ClientBackURL !== null)
+            $order['ClientBackURL'] = $this->ClientBackURL;
+
+        if ($this->CustomerURL != null)
+            $order['CustomerURL'] = $this->CustomerURL;
+
+        if ($this->ExpireDate !== null)
+            $order['ExpireDate'] = $this->ExpireDate;
+
+        if ($this->PaymentMethod == PaymentMethod::Credit)
+            $order['Language'] = $this->LangType;
+
+        return $order;
     }
 
-    public function setCheckValue($arParameters): string
+    function getTradeInfo($order): array
     {
-        $sMacValue = '';
+        $http = new Client;
 
-        if (isset($arParameters)) {
-            unset($arParameters['CheckMacValue']);
-            uksort($arParameters, array('self', 'merchantSort'));
+        $url = $this->ProviderUrl . 'QueryTradeInfo/' . $this->Version;
 
-            // 組合字串
-            $sMacValue = 'HashKey=' . $this->HashKey;
-            foreach ($arParameters as $key => $value) {
-                $sMacValue .= '&' . $key . '=' . $value;
-            }
+        $data = [
+            'MerchantID' => $this->MerchantID,
+            'MerchantTradeNo' => $order,
+            'TimeStamp' => time(),
+        ];
 
-            $sMacValue .= '&HashIV=' . $this->HashIV;
+        try{
+            $data['CheckMacValue'] = $this->setCheckValue($data);
+            $response = $http->post($url, [
+                'form_params' => $data
+            ]);
 
-            // URL Encode編碼
-            $sMacValue = urlencode($sMacValue);
-
-            // 轉成小寫
-            $sMacValue = strtolower($sMacValue);
-
-            // 取代為與 dotNet 相符的字元
-            $sMacValue = str_replace('%2d', '-', $sMacValue);
-            $sMacValue = str_replace('%5f', '_', $sMacValue);
-            $sMacValue = str_replace('%2e', '.', $sMacValue);
-            $sMacValue = str_replace('%21', '!', $sMacValue);
-            $sMacValue = str_replace('%2a', '*', $sMacValue);
-            $sMacValue = str_replace('%28', '(', $sMacValue);
-            $sMacValue = str_replace('%29', ')', $sMacValue);
-
-            // 編碼
-            switch ($arParameters['EncryptType']) {
-                case EncryptType::ENC_SHA256:
-                    // SHA256 編碼
-                    $sMacValue = hash('sha256', $sMacValue);
-                    break;
-
-                case EncryptType::ENC_MD5:
-                default:
-                    // MD5 編碼
-                    $sMacValue = md5($sMacValue);
-            }
-            $sMacValue = strtoupper($sMacValue);
+        } catch (\Exception $e) {
+            throw new \Exception('TradeInfo is null');
         }
 
-        return $sMacValue;
+        $info = explode('&', $response->getBody());
+        $result = [];
+        foreach ($info as $value) {
+            list($key, $v) = explode('=', $value);
+            $result[$key] = $v;
+        }
+
+        return $result;
     }
 }

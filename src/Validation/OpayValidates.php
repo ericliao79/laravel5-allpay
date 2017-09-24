@@ -23,5 +23,8 @@ trait OpayValidates
         ];
 
         $this->isValidOnNull($required, $data);
+
+        $this->isValidUrl();
+
     }
 }

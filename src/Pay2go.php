@@ -1,35 +1,41 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: eric
- * Date: 2017/9/20
- * Time: 15:58
- */
-
 namespace ericliao79\l5allpay;
 
+use ericliao79\l5allpay\Traits\BaseTrait;
+use ericliao79\l5allpay\Traits\DebugTrait;
 
-interface PaysInterface
+class Pay2go extends PaysAbstract implements PaysInterface
 {
+    use BaseTrait, DebugTrait;
+
     /**
      * 設定金流商網址
      * @param $debug_mode
      * @return mixed
      */
-    function setProviderUrl($debug_mode);
+    function setProviderUrl($debug_mode)
+    {
+        //TODO: 金流商 api
+    }
 
     /**
      * 設定交易方式
      * @param $PaymentMethod
      * @return mixed
      */
-    function setPaymentMethod($PaymentMethod);
+    function setPaymentMethod($PaymentMethod)
+    {
+        //TODO: 交易方式
+    }
 
     /**
      * @param $url
      * @return mixed
      */
-    function setReturnURL($url);
+    function setReturnURL($url)
+    {
+
+    }
 
 
     /**
@@ -40,28 +46,40 @@ interface PaysInterface
      * @param $ItemDesc string 商品描述
      * @return mixed
      */
-    function setOrder($order_id, $TotalAmount, $ItemName, $ItemDesc);
+    function setOrder($order_id, $TotalAmount, $ItemName, $ItemDesc)
+    {
+
+    }
 
     /**
      * 發送訂單
      * @param $need_form bool 是否需要form
      * @return mixed
      */
-    function submitOrder($need_form);
+    function submitOrder($need_form)
+    {
+
+    }
 
     /**
      * 設定 API 版本
      * @param $version
      * @return mixed
      */
-    function setVersion($version);
+    function setVersion($version)
+    {
+
+    }
 
     /**
      * 設定語言: 預設繁體中文
      * @param $lang
      * @return mixed
      */
-    function setLangType($lang);
+    function setLangType($lang)
+    {
+
+    }
 
     /**
      * 設定交易通知連結
@@ -69,7 +87,10 @@ interface PaysInterface
      * @param $notify_url
      * @return $this
      */
-    function setNotifyURL($notify_url);
+    function setNotifyURL($notify_url)
+    {
+
+    }
 
     /**
      * 設定客製化連結
@@ -77,7 +98,10 @@ interface PaysInterface
      * @param $customer_url
      * @return $this
      */
-    function setCustomerURL($customer_url);
+    function setCustomerURL($customer_url)
+    {
+
+    }
 
     /**
      * 設定交易失敗連結
@@ -85,35 +109,36 @@ interface PaysInterface
      * @param $client_back_url
      * @return $this
      */
-    function setClientBackURL($client_back_url);
+    function setClientBackURL($client_back_url)
+    {
+
+    }
 
     /**
      * 建立交易時間
      * @return mixed
      */
-    function setTimeStamp();
+    function setTimeStamp()
+    {
+
+    }
 
     /**
      * 參數客製化
      * @return array
      */
-    function OrderFormatter();
+    function OrderFormatter()
+    {
+
+    }
 
     /**
      * 產生檢查碼
      * @param $data
      * @return mixed
      */
-    function setCheckValue($data);
+    function setCheckValue($data)
+    {
 
-    function setExpireDate($ExpireDate);
-
-    function setExpireTime($ExpireTime);
-
-    /**
-     * 取得訂單資訊
-     * @param $order 商家訂單唯一值
-     * @return mixed
-     */
-    function getTradeInfo($order);
+    }
 }

@@ -16,4 +16,13 @@ trait DebugTrait
     {
         $this->debug = true;
     }
+
+    function __get($name)
+    {
+        if (!$this->debug) {
+            return;
+        }
+
+        return $this->$name;
+    }
 }
