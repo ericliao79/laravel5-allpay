@@ -14,7 +14,8 @@ trait DebugTrait
 
     function debug()
     {
-        $this->debug = true;
+        if (env('APP_ENV') === 'testing')
+            $this->debug = true;
     }
 
     function __get($name)

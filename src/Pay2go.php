@@ -3,10 +3,11 @@ namespace ericliao79\l5allpay;
 
 use ericliao79\l5allpay\Traits\BaseTrait;
 use ericliao79\l5allpay\Traits\DebugTrait;
+use ericliao79\l5allpay\Traits\Pay2goTrait;
 
 class Pay2go extends PaysAbstract implements PaysInterface
 {
-    use BaseTrait, DebugTrait;
+    use BaseTrait, DebugTrait, Pay2goTrait;
 
     /**
      * 設定金流商網址
@@ -132,16 +133,6 @@ class Pay2go extends PaysAbstract implements PaysInterface
 
     }
 
-    /**
-     * 產生檢查碼
-     * @param $data
-     * @return mixed
-     */
-    function setCheckValue($data)
-    {
-
-    }
-
     function setExpireDate($ExpireDate)
     {
         // TODO: Implement setExpireDate() method.
@@ -151,10 +142,6 @@ class Pay2go extends PaysAbstract implements PaysInterface
     function setExpireTime($ExpireTime)
     {
         // TODO: Implement setExpireTime() method.
-    }
-
-    function setOrderSubmitForm($url, $data)
-    {
     }
 
     function getTradeInfo($order)

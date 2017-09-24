@@ -13,6 +13,7 @@
         </testsuite>
     </testsuites>
     <php>
+        <env name="APP_ENV" value="testing"/>
         <env name="APP_URL" value="http://allpay.dev/"/>
         <env name="ALLPAY_ReturnUrl" value="return/"/>
         <env name="ALLPAY_NotifyURL" value="callback/"/>

@@ -116,4 +116,6 @@ interface PaysInterface
      * @return mixed
      */
     function getTradeInfo($order);
+
+    function setOrderSubmitForm($url, $data);
 }
