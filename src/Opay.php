@@ -17,7 +17,6 @@ use GuzzleHttp\Client;
  * @property  PaysAbstract MerchantID
  * @property  PaysAbstract HashKey
  * @property  PaysAbstract HashIV
- * @package ericliao79\l5allpay
  */
 class Opay extends PaysAbstract implements PaysInterface
 {

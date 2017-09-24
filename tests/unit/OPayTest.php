@@ -71,7 +71,7 @@ class OPayTest extends TestCase
 
     /**
      * @test
-     * @group now
+     * @property string ClientBackURL
      */
     public function ClientURL()
     {
@@ -254,7 +254,7 @@ class OPayTest extends TestCase
         // throw TradeException
         $this->expectException(TradeException::class);
         $this->expectExceptionMessage('MerchantTradeNo is null.');
-        $actual = $order->submitOrder(false);
+        $order->submitOrder(false);
     }
 
     /**
@@ -273,7 +273,7 @@ class OPayTest extends TestCase
         // throw TradeException
         $this->expectException(TradeException::class);
         $this->expectExceptionMessage('TotalAmount is null.');
-        $actual = $order->submitOrder(false);
+        $order->submitOrder(false);
     }
 
     /**
@@ -292,7 +292,7 @@ class OPayTest extends TestCase
         // throw TradeException
         $this->expectException(TradeException::class);
         $this->expectExceptionMessage('ItemName is null.');
-        $actual = $order->submitOrder(false);
+        $order->submitOrder(false);
     }
 
     /**
@@ -311,6 +311,6 @@ class OPayTest extends TestCase
         // throw TradeException
         $this->expectException(TradeException::class);
         $this->expectExceptionMessage('TradeDesc is null.');
-        $actual = $order->submitOrder(false);
+        $order->submitOrder(false);
     }
 }

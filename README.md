@@ -1,5 +1,5 @@
 # laravel5-allpay
-[![CircleCI](https://circleci.com/gh/ericliao79/l5-allpay.svg?style=shield)](https://circleci.com/gh/ericliao79/l5-allpay)
+[![CircleCI](https://circleci.com/gh/ericliao79/laravel5-allpay.svg?style=shield)](https://circleci.com/gh/ericliao79/laravel5-allpay)
 
 Taiwan's Third-Party Payment SDK all-in-one for Laravel.
 

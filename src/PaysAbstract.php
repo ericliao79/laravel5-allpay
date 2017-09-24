@@ -8,7 +8,24 @@
 
 namespace ericliao79\l5allpay;
 
-
+/**
+ * Class PaysAbstract
+ * @package ericliao79\l5allpay
+ * @property  string MerchantID
+ * @property  string HashKey
+ * @property  string HashIV
+ * @property string ClientBackURL
+ * @property string ProviderUrl
+ * @property string PaymentMethod
+ * @property string MerchantOrderNo
+ * @property int TotalAmount
+ * @property string ItemName
+ * @property string ItemDesc
+ * @property string ReturnURL
+ * @property string Version
+ * @property string LangType
+ * @property string TimeStamp
+ */
 abstract class PaysAbstract
 {
     /**
@@ -42,7 +59,7 @@ abstract class PaysAbstract
     protected $LangType;
 
     /**
-     * @var 供應商 api 版本
+     * @var string 供應商 api 版本
      */
     protected $Version;
 

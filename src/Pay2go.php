@@ -141,4 +141,24 @@ class Pay2go extends PaysAbstract implements PaysInterface
     {
 
     }
+
+    function setExpireDate($ExpireDate)
+    {
+        // TODO: Implement setExpireDate() method.
+    }
+
+
+    function setExpireTime($ExpireTime)
+    {
+        // TODO: Implement setExpireTime() method.
+    }
+
+    function setOrderSubmitForm($url, $data)
+    {
+    }
+
+    function getTradeInfo($order)
+    {
+        // TODO: Implement getTradeInfo() method.
+    }
 }
