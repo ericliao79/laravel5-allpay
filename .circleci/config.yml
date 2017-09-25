@@ -23,7 +23,7 @@ jobs:
 
   "php-7.0":
     docker:
-      - image: circleci/php:7.1-browsers
+      - image: circleci/php:7.0-browsers
     working_directory: ~/laravel
     steps:
       - checkout
