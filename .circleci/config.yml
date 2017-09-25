@@ -3,8 +3,10 @@ version: 2.0
 jobs:
   "php-7.1":
     docker:
-      - image: circleci/php:7.1.9-browsers
+      - image: circleci/php:7.1-browsers
     working_directory: ~/laravel
+    environment:
+      TZ: "/usr/share/zoneinfo/Asia/Taipei"
     steps:
       - checkout
       ##- run: composer self-update
@@ -21,7 +23,7 @@ jobs:
 
   "php-7.0":
     docker:
-      - image: circleci/php:7.1.9-browsers
+      - image: circleci/php:7.1-browsers
     working_directory: ~/laravel
     steps:
       - checkout
