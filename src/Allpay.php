@@ -16,7 +16,7 @@ class Allpay
                 $Provider = Pay2go::class;
                 break;
             default:
-                throw new \Exception('tttt');
+                throw new \Exception($Provider . "isn't supported");
         }
 
 
