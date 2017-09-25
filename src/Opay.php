@@ -142,6 +142,7 @@ class Opay extends PaysAbstract implements PaysInterface
 
     public function setExpireTime($ExpireTime): self
     {
+        //TODO: 超商timeout
 //        if ($ExpireTime != null)
 //            $this->ExpireTime = $ExpireTime;
 
