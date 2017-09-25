@@ -1,4 +1,5 @@
 # laravel5-allpay
+[![Build Status](https://travis-ci.org/ericliao79/laravel5-allpay.svg?branch=master)](https://travis-ci.org/ericliao79/laravel5-allpay)
 [![CircleCI](https://circleci.com/gh/ericliao79/laravel5-allpay.svg?style=shield)](https://circleci.com/gh/ericliao79/laravel5-allpay)
 [![Coverage Status](https://coveralls.io/repos/github/ericliao79/laravel5-allpay/badge.svg?branch=master)](https://coveralls.io/github/ericliao79/laravel5-allpay?branch=master)
 
