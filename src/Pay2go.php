@@ -1,4 +1,5 @@
 <?php
+
 namespace ericliao79\l5allpay;
 
 use ericliao79\l5allpay\Traits\BaseTrait;
@@ -9,6 +10,26 @@ class Pay2go extends PaysAbstract implements PaysInterface
 {
     use BaseTrait, DebugTrait, Pay2goTrait;
 
+    public function __construct($MerchantID = null, $HashKey = null, $HashIV = null)
+    {
+        $this->MerchantID = $MerchantID ?? config('allpay.MerchantID');
+        $this->HashKey = $HashKey ?? config('allpay.HashKey');
+        $this->HashIV = $HashIV ?? config('allpay.HashIV');
+        $this->setPaymentMethod(config('allpay.paymentMethod'));
+        $this->setVersion(config('allpay.Version'));
+        $this->setLangType(config('allpay.LangType'));
+        $this->setTimeStamp();
+
+        $this->setProviderUrl(config('allpay.Debug'));
+        $this->setReturnURL(config('allpay.ReturnURL'));
+        $this->setNotifyURL(config('allpay.NotifyURL'));
+        $this->setCustomerURL(config('allpay.CustomerURL'));
+        $this->setClientBackURL(config('allpay.ClientBackURL'));
+
+        $this->setExpireDate(config('allpay.ExpireDays'));
+        $this->setExpireTime(config('allpay.ExpireTime'));
+    }
+
     /**
      * 設定金流商網址
      * @param $debug_mode
@@ -16,7 +37,11 @@ class Pay2go extends PaysAbstract implements PaysInterface
      */
     function setProviderUrl($debug_mode)
     {
-        //TODO: 金流商 api
+        if ($debug_mode)
+            $this->ProviderUrl = 'https://ccore.spgateway.com/MPG/mpg_gateway/';
+        else
+            $this->ProviderUrl = 'https://core.spgateway.com/MPG/mpg_gateway/';
+        return $this;
     }
 
     /**
@@ -31,11 +56,13 @@ class Pay2go extends PaysAbstract implements PaysInterface
 
     /**
      * @param $url
-     * @return mixed
+     * @return Pay2go
      */
-    function setReturnURL($url)
+    function setReturnURL($url): self
     {
+        $this->ReturnURL = $url;
 
+        return $this;
     }
 
 
@@ -65,21 +92,25 @@ class Pay2go extends PaysAbstract implements PaysInterface
     /**
      * 設定 API 版本
      * @param $version
-     * @return mixed
+     * @return Pay2go
      */
-    function setVersion($version)
+    function setVersion($version): self
     {
+        $this->Version = $version;
 
+        return $this;
     }
 
     /**
      * 設定語言: 預設繁體中文
      * @param $lang
-     * @return mixed
+     * @return Pay2go
      */
-    function setLangType($lang)
+    function setLangType($lang): self
     {
+        $this->LangType = $lang;
 
+        return $this;
     }
 
     /**

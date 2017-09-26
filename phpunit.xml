@@ -9,8 +9,8 @@
          stopOnSkipped="false"
          bootstrap="vendor/autoload.php">
     <testsuites>
-        <testsuite name="all">
-            <directory suffix="Test.php">tests/</directory>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <filter>

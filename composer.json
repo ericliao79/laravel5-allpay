@@ -21,7 +21,7 @@
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0",
-        "illuminate/support": "^5.5"
+        "orchestra/testbench": "~3.5"
     },
     "autoload": {
         "psr-4": {
@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ericliao79\\l5allpay\\Tests\\": "tests"
+            "Tests\\": "tests/"
         }
     }
 }

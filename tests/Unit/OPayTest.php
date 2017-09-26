@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/../../tools.php';
+namespace Tests\Unit;
 
 use ericliao79\l5allpay\Opay;
 use ericliao79\l5allpay\Criteria\LangType;
 use ericliao79\l5allpay\Criteria\PaymentMethod;
 use ericliao79\l5allpay\Exceptions\PaymentMethodException;
 use ericliao79\l5allpay\Exceptions\TradeException;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class OPayTest extends TestCase
 {
